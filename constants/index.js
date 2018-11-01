@@ -1,7 +1,7 @@
-const KEY = require('../config.js').config.api_key
+const MAP_KEY = require('../config.js').config.mapAPI
 
 const options = {
-	url: `http://www.mapquestapi.com/geocoding/v1/address?key=${KEY}&location=`,
+	url: `http://www.mapquestapi.com/geocoding/v1/address?key=${MAP_KEY}&location=`,
 	json: true
 }
 
