@@ -1,13 +1,18 @@
 const request = require('request')
-const weatherAPI = require('../config').weatherAPI
+const weatherAPI = require('../config').config.weatherAPI
 
-const getWeather = (lat,lng, cb) => {
-	request({
+const getWeather = (lat, lng, cb) => {
+	
+	const options = {
 		url: `https://api.darksky.net/forecast/${weatherAPI}/${lat},${lng}`,
 		json: true
-	}, (err, resp, body) => {
+	}
+	request(options, (err, resp, body) => {
 		if (!err && resp.statusCode === 200) {
-			cb(null, 'Current temperature in Closter, NJ:', body.currently.temperature + ' degrees F')
+			cb(null, {
+				temperature: body.currently.temperature,
+				apparentTemperature: body.currently.apparentTemperature
+			})
 		} else {
 			cb('Unable to fetch weather')
 		}

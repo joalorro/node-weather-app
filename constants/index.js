@@ -1,10 +1,17 @@
-const MAP_KEY = require('../config.js').config.mapAPI
+const MAP_API = require('../config.js').config.mapAPI
+const WEATHER_API = require('../config.js').config.weatherAPI
 
-const options = {
-	url: `http://www.mapquestapi.com/geocoding/v1/address?key=${MAP_KEY}&location=`,
+const geoOptions = {
+	url: `http://www.mapquestapi.com/geocoding/v1/address?key=${MAP_API}&location=`,
+	json: true
+}
+
+const weatherOptions = {
+	url: `https://api.darksky.net/forecast/${WEATHER_API}`,
 	json: true
 }
 
 module.exports = {
-	options
+	geoOptions,
+	weatherOptions
 }

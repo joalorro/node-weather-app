@@ -15,17 +15,19 @@ const argv = yargs
 	.alias('h', 'help')
 	.argv
 
-const messageCallback = (err,res) => {
+const weatherMessage = (err,res) => {
 	if (err) {
 		console.log(err)
 	} else {
-		console.log(res)
+		console.log(`It's currently ${res.temperature} deg F, but it feels like ${res.apparentTemperature} deg F.`)
 	}
 }
 
-// geocode.geocodeAddress(argv.address, messageCallback)
-
-const lat = 40.972413
-const lng = -73.958884
-//pass in lat, lng, callback
-weather.getWeather(lat,lng, messageCallback)
+geocode.geocodeAddress(argv.address, (err,res) => {
+	if (err) {
+		console.log(err)
+	} else {
+		console.log(res.address)
+		weather.getWeather(res.lat,res.lng, weatherMessage)
+	}
+})
